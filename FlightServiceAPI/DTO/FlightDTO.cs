@@ -1,11 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FlightServiceAPI.Models;
 
-namespace FlightServiceAPI.Models
+namespace FlightServiceAPI.DTO
 {
-    public partial class Flight
+    public class FlightDTO
     {
-        [Key]
-        public int Id { get; set; }
         public string FlightNumber { get; set; }
         public string Destination { get; set; }
         public DateTime DepartureDateTime { get; set; }
@@ -13,7 +11,5 @@ namespace FlightServiceAPI.Models
         public string DepartureAirport { get; set; }
         public string ArrivalAirport { get; set; }
         public int MaxCapacity { get; set; }
-
-        public virtual ICollection<Passenger> Passengers { get; set; }
     }
 }

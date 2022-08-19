@@ -1,0 +1,26 @@
+<div class="container">
+    <h1>Passengers</h1>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Occupation</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let passenger of passengers">
+                <td>{{ passenger.id }}</td>
+                <td>{{ passenger.name }}</td>
+                <td>{{ passenger.age }}</td>
+                <td>{{ passenger.email }}</td>
+                <td>{{ passenger.occupation }}</td>
+                <td><a href="#" [routerLink]="['/passenger', 'details', passenger.id]" class="btn btn-primary">Details</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="#" routerLink="/passenger/create/" class="btn btn-success">Add passenger</a>
+</div>

@@ -1,0 +1,37 @@
+<div class="container">
+    <a href="#" routerLink="/passenger/index" class="btn btn-primary">Back</a>
+    <h1>Create a new passenger</h1>
+    <form [formGroup]="newPassengerForm" (ngSubmit)="submit()">
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name" />
+            <div *ngIf="f['name'].touched && f['name'].invalid" class="alert alert-danger">
+                <div *ngIf="f['name'].errors f['name'].errors['required']">Name is required.</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="text" class="form-control" id="age" formControlName="age" />
+            <div *ngIf="f['age'].touched && f['age'].invalid" class="alert alert-danger">
+                <div *ngIf="f['age'].errors f['age'].errors['required']">Age is required.</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" formControlName="email" />
+            <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
+                <div *ngIf="f['email'].errors f['email'].errors['required']">Email is required.</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="occupation">Occupation</label>
+            <input type="text" class="form-control" id="occupation" formControlName="occupation" />
+            <div *ngIf="f['occupation'].touched && f['occupation'].invalid" class="alert alert-danger">
+                <div *ngIf="f['occupation'].errors f['occupation'].errors['required']">Occupation is required.</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!newPassengerForm.valid">Submit</button>
+
+    </form>
+</div>

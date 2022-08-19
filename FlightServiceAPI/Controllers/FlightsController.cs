@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FlightServiceAPI.Data;
 using FlightServiceAPI.Models;
+using FlightServiceAPI.DTO;
 
 namespace FlightServiceAPI.Controllers
 {
@@ -25,10 +26,10 @@ namespace FlightServiceAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Flight>>> GetFlights()
         {
-          if (_context.Flights == null)
-          {
-              return NotFound();
-          }
+            if (_context.Flights == null)
+            {
+                return NotFound();
+            }
             return await _context.Flights.ToListAsync();
         }
 
@@ -36,10 +37,10 @@ namespace FlightServiceAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Flight>> GetFlight(int id)
         {
-          if (_context.Flights == null)
-          {
-              return NotFound();
-          }
+            if (_context.Flights == null)
+            {
+                return NotFound();
+            }
             var flight = await _context.Flights.FindAsync(id);
 
             if (flight == null)
@@ -84,16 +85,44 @@ namespace FlightServiceAPI.Controllers
         // POST: api/Flights
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Flight>> PostFlight(Flight flight)
+        public async Task<ActionResult<Flight>> PostFlight(FlightDTO flightDto)
         {
-          if (_context.Flights == null)
-          {
-              return Problem("Entity set 'FlightDbContext.Flights'  is null.");
-          }
+            if (_context.Flights == null)
+            {
+                return Problem("Entity set 'FlightDbContext.Flights' is null.");
+            }
+            var flight = new Flight()
+            {
+                FlightNumber = flightDto.FlightNumber,
+                Destination = flightDto.Destination,
+                DepartureDateTime = flightDto.DepartureDateTime,
+                ArrivalDateTime = flightDto.ArrivalDateTime,
+                DepartureAirport = flightDto.DepartureAirport,
+                ArrivalAirport = flightDto.ArrivalAirport,
+                MaxCapacity = flightDto.MaxCapacity,
+                Passengers = new List<Passenger>()
+            };
             _context.Flights.Add(flight);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetFlight", new { id = flight.Id }, flight);
+        }
+
+        // POST: api/Flights/5/Passengers/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost("{id}/Passenger/{passengerId}")]
+        public async Task<ActionResult<Passenger>> PostBooking(int id, int passengerId)
+        {
+            if (_context.Flights == null)
+            {
+                return Problem("Entity set 'FlightDbContext.Flights' is null.");
+            }
+            var passenger = await _context.Passengers.FindAsync(passengerId);
+            var flight = await _context.Flights.FindAsync(id);
+            flight.Passengers.Add(passenger);
+            await _context.SaveChangesAsync();
+
+            return Ok(flight);
         }
 
         // DELETE: api/Flights/5

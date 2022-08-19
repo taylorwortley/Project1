@@ -1,0 +1,63 @@
+<div class="container">
+    <a href="#" routerLink="/passenger/index" class="btn btn-primary">Back</a>
+    <h1>Passenger Information</h1>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Occupation</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ passenger.id }}</td>
+                <td>{{ passenger.name }}</td>
+                <td>{{ passenger.age }}</td>
+                <td>{{ passenger.email }}</td>
+                <td>{{ passenger.occupation }}</td>
+                <td>
+                    <a href="#" [routerLink]="['/passenger', 'edit', passenger.id]" class="btn btn-info">Edit</a>
+                    <button type="button" (click)="deletePassenger(passenger.id)" class="btn btn-danger">Delete</button> <!-- TODO: redirect back to index after deleting -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h1>Flights</h1>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Flight Number</th>
+                <th>Destination</th>
+                <th>Departure Time</th>
+                <th>Arrival Time</th>
+                <th>Departure Airport</th>
+                <th>Arrival Airport</th>
+                <th>Max Capacity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let flight of flights">
+                <td>{{ flight.id }}</td>
+                <td>{{ flight.flightNumber }}</td>
+                <td>{{ flight.destination }}</td>
+                <td>{{ flight.departureDateTime }}</td>
+                <td>{{ flight.arrivalDateTime }}</td>
+                <td>{{ flight.departureAirport }}</td>
+                <td>{{ flight.arrivalAirport }}</td>
+                <td>{{ flight.maxCapacity }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="flightId">Flight ID</label>
+            <input type="text" id="flightId" formControlName="flightId" size="5" />
+        </div>
+        <button type="submit" class="btn btn-success">Add Flight</button>
+    </form>
+</div>

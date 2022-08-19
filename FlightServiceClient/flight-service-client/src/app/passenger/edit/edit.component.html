@@ -1,0 +1,37 @@
+<div class="container">
+    <h1>Edit a passenger</h1>
+    <a href="#" routerLink="/passenger/index" class="btn btn-primary">Back</a> <!-- TODO: make back button go to relevant details page instead of index -->
+    <form [formGroup]="editPassengerForm" (ngSubmit)="submit()">
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name" [(ngModel)]="passenger.name" />
+            <div *ngIf="f['name'].touched && f['name'].invalid" class="alert alert-danger">
+                <div *ngIf="f['name'].errors f['name'].errors['required']">Name is required.</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="text" class="form-control" id="age" formControlName="age" [(ngModel)]="passenger.age" />
+            <div *ngIf="f['age'].touched && f['age'].invalid" class="alert alert-danger">
+                <div *ngIf="f['age'].errors f['age'].errors['required']">Age is required.</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" formControlName="email" [(ngModel)]="passenger.email" />
+            <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
+                <div *ngIf="f['email'].errors f['email'].errors['required']">Email is required.</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="occupation">Occupation</label>
+            <input type="text" class="form-control" id="occupation" formControlName="occupation" [(ngModel)]="passenger.occupation" />
+            <div *ngIf="f['occupation'].touched && f['occupation'].invalid" class="alert alert-danger">
+                <div *ngIf="f['occupation'].errors f['occupation'].errors['required']">Occupation is required.</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!editPassengerForm.valid">Update</button>
+
+    </form>
+</div>

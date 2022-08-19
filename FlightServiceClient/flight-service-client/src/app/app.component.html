@@ -1,0 +1,24 @@
+<div class="container">
+  <header class="bd-header bg-dark py-3 d-flex align-items-stretch border-bottom border-dark">
+    <div class="container-fluid d-flex align-items-center">
+      <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <a href="#" class="navbar-brand">
+          <h1 class="d-flex align-items-center fs-4 text-white mb-0">Flight Service</h1>
+        </a>
+        <div class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a routerLink="flight" class="nav-link">Flights</a>
+          </li>
+        </div>
+        <div class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a routerLink="passenger" class="nav-link">Passengers</a>
+          </li>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <div class="container mt-3">
+    <router-outlet></router-outlet>
+  </div>
+</div>
